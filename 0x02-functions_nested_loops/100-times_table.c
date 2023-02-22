@@ -1,51 +1,54 @@
-#include <stdio.h>
+#include "main.h"
 
 /**
- * main - Prints the first 98 Fibonacci numbers, starting with
- *        1 and 2, separated by a comma followed by a space.
+ * print_times_table - prints the times table
+ * @n: integer for which the times table will be printed
  *
- * Return: Always 0.
+ * Description: prints the times table
+ *
+ * Return: void
  */
-int main(void)
+
+void print_times_table(int n)
 {
-	int count;
-	unsigned long fib1 = 0, fib2 = 1, sum;
-	unsigned long fib1_half1, fib1_half2, fib2_half1, fib2_half2;
-	unsigned long half1, half2;
+	int row, column, product;
 
-	for (count = 0; count < 92; count++)
+	if (n >= 0 && n < 15)
 	{
-		sum = fib1 + fib2;
-		printf("%lu, ", sum);
-
-		fib1 = fib2;
-		fib2 = sum;
-	}
-
-	fib1_half1 = fib1 / 10000000000;
-	fib2_half1 = fib2 / 10000000000;
-	fib1_half2 = fib1 % 10000000000;
-	fib2_half2 = fib2 % 10000000000;
-
-	for (count = 93; count < 99; count++)
-	{
-		half1 = fib1_half1 + fib2_half1;
-		half2 = fib1_half2 + fib2_half2;
-		if (fib1_half2 + fib2_half2 > 9999999999)
+		for (row = 0; row <= n; row++)
 		{
-			half1 += 1;
-			half2 %= 10000000000;
+			for (column = 0; column <= n; column++)
+			{
+				product = row * column;
+
+				if (column == 0)
+					_putchar('0');
+				else if (product < 10)
+				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar(product % 10 + '0');
+				}
+				else if (product >= 10 && product < 100)
+				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar(' ');
+					_putchar((product / 10) % 10 + '0');
+					_putchar(product % 10 + '0');
+				}
+				else if (product > 99 && product < 1000)
+				{
+					_putchar(',');
+					_putchar(' ');
+					_putchar(product / 100 + '0');
+					_putchar((product / 10) % 10 + '0');
+					_putchar(product % 10 + '0');
+				}
+			}
+			_putchar('\n');
 		}
-
-		printf("%lu%lu", half1, half2);
-		if (count != 98)
-			printf(", ");
-
-		fib1_half1 = fib2_half1;
-		fib1_half2 = fib2_half2;
-		fib2_half1 = half1;
-		fib2_half2 = half2;
 	}
-	printf("\n");
-	return (0);
 }
