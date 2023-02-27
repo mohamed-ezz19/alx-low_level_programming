@@ -1,4 +1,4 @@
-#include" main.c"
+#include "main.c"
 
 /**
  * _puts - prints a string and a new line
